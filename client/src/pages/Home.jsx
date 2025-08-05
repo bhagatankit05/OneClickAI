@@ -14,6 +14,7 @@ const Home = () => {
     <AiTools/>
     <Testimonial/>
     <Plan/>
+     <Footer/>
     </>
   )
 }
