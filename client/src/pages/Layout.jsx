@@ -16,9 +16,9 @@ const Layout = () => {
   return user ? (
     <div className='flex flex-col items-start justify-start h-screen'>
       <nav className='w-full px-8 min-h-14 flex items-center justify-between border-b border-gray-200'>
-        <img src={assets.logo_1} alt="" onClick={() => navigate('/')} className='w-34 h-15' />
+        <img src={assets.logo_1} alt="" onClick={() => navigate('/')} className='w-34 h-15 cursor-pointer' />
         {
-          sidebar ? <X onClick={() => setSidebar(false)} className='w-6 h-6 text-gray-600 sm:hidden' /> : <Menu onClick={() => setSidebar(true)} className='w-6 h-6 text-gray-600 sm:hidden' />
+          sidebar ? <X onClick={() => setSidebar(false)} className='h-10 w-34 max-w-[150px] object-contain cursor-pointer' /> : <Menu onClick={() => setSidebar(true)} className='w-6 h-6 text-gray-600 sm:hidden' />
         }
       </nav>
 
