@@ -182,3 +182,36 @@ export const removeImageBackground = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 };
+
+export const removeImageObject = async (req, res) => {
+    try {
+        const { userId } = req.auth();
+        const { object } = req.file;
+        const plan = req.plan;
+
+        // Limit check for free users
+        if (plan !== 'premium') {
+            return res.json({ success: false, message: "This feature is only available for premium subscriptions" });
+        }
+
+        
+        const {public_id} = await cloudinary.uploader.upload(image.path);
+       const imageUrl = cloudinary.url(public_id,{
+            transformation:[{effect:`gen_remove:${object}`}],
+            resource_type:'image'
+        })
+
+        // Insert into creations table with type column
+        await sql`
+            INSERT INTO creations (user_id, prompt, content, type)
+            VALUES (${userId},${`Remove ${object} from image`}, ${secure_url}, 'image')`;
+
+        res.json({ success: true, content: imageUrl});
+
+    } catch (error) {
+        console.error(error.message);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+
