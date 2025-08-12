@@ -51,8 +51,8 @@ const Sidebar = ({ sidebar, setSidebar }) => {
             <div>
                 <h1 className='text-sm font-medium'>{user.fullName}</h1>
                 <p>
-                    <Protect plan='premium' fallback='free'>Premium</Protect>
-                    plan
+                    <Protect plan='premium' fallback='Free'>Premium </Protect>
+                     Plan
                 </p>
             </div>
             </div>
