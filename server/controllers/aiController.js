@@ -188,7 +188,8 @@ export const removeImageBackground = async (req, res) => {
 export const removeImageObject = async (req, res) => {
     try {
         const { userId } = req.auth();
-        const { object } = req.file;
+        const { object } = req.body;
+        const image = req.file;
         const plan = req.plan;
 
         // Limit check for free users
@@ -206,7 +207,7 @@ export const removeImageObject = async (req, res) => {
         // Insert into creations table with type column
         await sql`
             INSERT INTO creations (user_id, prompt, content, type)
-            VALUES (${userId},${`Remove ${object} from image`}, ${secure_url}, 'image')`;
+            VALUES (${userId},${`Remove ${object} from image`}, ${public_id}, 'image')`;
 
         res.json({ success: true, content: imageUrl});
 
